@@ -1,0 +1,520 @@
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Image, 
+  StatusBar, 
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  TextInput,
+  CheckBox,
+} from 'react-native';
+import { Container, Header, Button,
+Right, Body, Content, ListItem, Card} from 'native-base';
+import Place from '../../0- Componentes/Discover/card';
+//import { TextInput,TextInputMask } from 'react-native-paper';
+import { Actions } from 'react-native-router-flux';
+
+class Clinicas extends Component {
+ 
+  _submit(a) {
+
+    if (a == 1) {
+      Actions.rdoencas(); 
+    }
+    if (a == 2) {
+      Actions.home2(); 
+    }
+    if (a == 3) {
+      Actions.home3(); 
+    }
+    if (a == 'search') {
+      Actions.pesquisa(); 
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: 'true',
+      shadow: false
+    };
+  }
+
+ 
+  render() {
+    return (
+      <Container style={{backgroundColor:'#EAEAEA'}}>
+       
+       <Header style={{zIndex:1000, backgroundColor: 'white'}} noShadow={this.state.shadow}>
+          <Body>
+          </Body>
+          <Right>
+            <Button transparent onPress={()=> this._submit('search')}>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../../assets/icon/menu/pesquisa.png')}/>
+            </Button>
+            <Button transparent onPress={()=> this._submit('search')}>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../../assets/icon/menu/definicao.png')}/>
+            </Button>
+          </Right>
+        </Header>
+
+        <View>
+          <StatusBar barStyle = "dark-content" hidden = {false} 
+          backgroundColor = "white" translucent = {false}
+          />
+        </View>
+
+        <View style={{position:'absolute', top:'85%'}}>
+          <Button rounded style={styles.search_button}>
+            <Image style={{width:20, height:20}}
+            source = {require('../../../../assets/icon/radar1.png')}/>
+          </Button>
+        </View>
+        
+        <ScrollView  styles={{marginLeft:'3%'}} showsVerticalScrollIndicator={false} style={{zIndex:-100}}
+        // onScrollBeginDrag={()=> this.setState({ shadow: false })}
+        >
+
+
+         {/* <View style={{marginTop:'30%'}}/> */}
+
+            <View style={{flexDirection:'column'}}>
+              <View style={{flexDirection:'row'}}>
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/americo.png')}
+                  nome="Americo Boavida do primeiro grau"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/josina1.png')}
+                  nome="Josina Machel"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+              </View>
+              <View style={{flexDirection:'row', marginTop:4}}>
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/americo.png')}
+                  nome="Americo Boavida do primeiro grau"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/josina1.png')}
+                  nome="Josina Machel"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+              </View>
+              <View style={{flexDirection:'row', marginTop:4}}>
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/americo.png')}
+                  nome="Americo Boavida do primeiro grau"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+                <Place
+                  capa={require('../../../../assets/Imagens/home/clinicas/josina1.png')}
+                  nome="Josina Machel"
+                  distancia="Avenida comandante gica / Bairro novo"
+                />
+              </View>
+            </View>
+            
+
+          <View>  
+            
+           
+
+
+            {/* FIM VIEW GLOBAL */}
+          </View>
+
+        </ScrollView>
+    
+      </Container>
+      
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+ //TEXTO
+
+ info_apoio:{
+  marginTop: '2%',
+  marginBottom: 20,
+//  position:'absolute',
+  zIndex:30,
+ // backgroundColor:'blue',
+ },
+
+ subtitulo_apoio: {
+  alignSelf:'center',
+  color:'black',
+  fontFamily:'Roboto-Bold',
+  fontSize: 14,
+  textAlign:'center',
+},
+
+
+ card:{
+  elevation:2,
+  width:'44%',
+  height:'50%',
+  marginLeft:'3%', 
+  marginRight:'3%', 
+  borderRadius:13, 
+  borderColor:'transparent',
+}, 
+card_image:{
+  width:'100%', 
+  height: '100.2%', 
+ // borderBottomLeftRadius:18,
+ // borderBottomRightRadius:18, 
+ // borderRadius:13,
+  borderTopLeftRadius:13,
+  borderTopRightRadius:13,
+  borderColor:'transparent',
+},
+card_popup:{
+  width:'100%', 
+  height: '100%', 
+ // borderBottomLeftRadius:18,
+ // borderBottomRightRadius:18, 
+  borderRadius:18,
+  borderColor:'transparent',
+},
+
+
+ //TESXTO FIM
+ 
+ 
+  search_text:{
+    fontFamily:'Medium',
+    fontSize:14,
+    marginLeft:'4%'
+  },
+  find_button:{
+    position:'absolute',
+    marginLeft:'82%',
+    marginTop:'3%',
+    zIndex:10,
+  },
+  search_area:{
+    width:'85%',
+    marginBottom:'2%',
+    marginTop:'3%'
+  },
+  search_button:{
+    width:60, 
+    height:60,
+    elevation:4,
+    justifyContent:'center',
+    marginLeft:'80%',
+    marginTop:'1%',
+    backgroundColor:'white'
+  },
+  search:{
+    backgroundColor:'#EAEAEA',
+    color:'red',
+    borderRadius:13,
+    width:'70%',
+    marginLeft:'4%',
+    marginRight:'4%',
+    marginTop:'2%',
+    marginBottom:'2%',
+  },
+  card1:{
+    elevation:3,
+    borderRadius:18,
+    borderColor:'transparent',
+    top:'4%',
+    marginBottom:8,
+    marginLeft:'3%',
+    marginRight:'3%',
+    //zIndex:-200,
+  },
+  infoBox: {
+    color:'#1e2023',
+    fontFamily:'Roboto-Condensed',
+    fontSize: 14,
+    textAlign:'left',
+  },
+  infoBoxButton: {
+    color:'white',
+    fontFamily:'Roboto',
+    fontSize: 12,
+    textAlign:'left',
+  },
+  
+  infoBoxInside: {
+    color:'#1e2023',
+    fontFamily:'Roboto-Condensed',
+    fontSize: 12,
+    textAlign:'left',
+  },
+
+  info: {
+    color:'#1e2023',
+    fontFamily:'Roboto',
+    fontSize: 14,
+    textAlign:'left',
+  },
+  ajuste:{
+    marginRight:'5%',
+  },
+  titulo: {
+    color:'#1e2023',
+    fontFamily:'Roboto-Bold',
+    fontSize: 14,
+    marginBottom: '1%',
+    marginLeft: '1%',
+    textAlign:'left',
+  },
+  descricao_botao: {
+    marginLeft: 3,
+    color:"white",
+    textAlign: 'center',
+    fontFamily:'Roboto',
+    fontSize:14,
+  },
+  titulo2: {
+    color:"black",
+    fontFamily:'Roboto-Bold',
+    fontSize: 15,
+    textAlign:'left',
+    fontWeight:'700',
+  },
+
+  descricao2: {
+    color:"#636363",
+    textAlign: 'left',
+    marginTop:'4%',
+    marginBottom:'4%',
+    fontFamily:'Roboto-Regular',
+    fontSize:12,
+  },
+
+  descricao3: {
+    color:'black',
+    textAlign: 'left',
+    fontFamily:'Roboto-Condensed',
+    fontSize:12,
+  },
+
+  bloco2: {
+    flex: 1,
+    alignContent:'center',
+  },
+  bloco3: {
+    flex: 1,
+  },  
+  wrapper: {
+
+  },
+
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  },
+});
+
+export default Clinicas;
+
+/*
+
+  render() {
+    return (
+      <Container>
+       
+       <Header style={{zIndex:100, backgroundColor: 'white'}} noShadow={this.state.shadow}>
+          <Body>
+          </Body>
+          <Right>
+            <Button transparent onPress={()=> this._submit('search')}>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../../assets/icon/menu/definicao.png')}/>
+            </Button>
+          </Right>
+        </Header>
+
+        <ScrollView  styles={{marginLeft:'3%'}} showsVerticalScrollIndicator={false} style={{zIndex:-100}}
+        // onScrollBeginDrag={()=> this.setState({ shadow: false })}
+        >
+          <View>
+            <StatusBar barStyle = "dark-content" hidden = {false} 
+            backgroundColor = "white" translucent = {false}
+            />
+          </View>
+
+          <View>  
+            
+            <View style={{backgroundColor:'blue'}}>
+              <Card style={styles.card1}>
+                <Text style={[styles.descricao2,{marginLeft:'4%'}]}>Faça um filtro</Text>
+                <Button transparent style={[styles.find_button]}>
+                    <Image style={{ marginTop:9 ,marginLeft:9, width:35, height:35}}
+                    source = {require('../../../../assets/icon/radar.png')}/>
+                </Button>
+                <View style={styles.search_area}>
+                  <Button transparent style={styles.search_button}>
+                    <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+                    source = {require('../../../../assets/icon/menu/pesquisa1.png')}/>
+                  </Button>
+                  <TextInput style={styles.search} placeholder="Digite o Nome da Entidade"/>
+                </View>
+              </Card>
+            </View>
+
+            <View style={{backgroundColor:'pink'}}>
+              <Card style={styles.card1}>
+                <Text style={[styles.descricao2,{marginLeft:'4%'}]}>Faça um filtro</Text>
+                <TextInput style={styles.search} placeholder="Digite o Nome da Entidade"/>
+              </Card>
+            </View>
+
+
+
+            {/* FIM VIEW GLOBAL 
+            </View>
+
+            </ScrollView>
+        
+          </Container>
+          
+        );
+      }
+    }
+    
+    const styles = StyleSheet.create({
+      find_button:{
+        position:'absolute',
+        marginLeft:'82%',
+        marginTop:'10%',
+        zIndex:10,
+      },
+      search_area:{
+        width:'85%',
+        marginBottom:'2%'
+      },
+      search_button:{
+        position:'absolute',
+        marginLeft:'80%',
+        marginTop:'1%',
+        zIndex:10,
+      },
+      search:{
+        backgroundColor:'#C7C7C7',
+        color:'red',
+        borderRadius:13,
+        marginLeft:'4%',
+        marginRight:'4%',
+        marginTop:'2%',
+        marginBottom:'2%',
+        fontFamily:'Medium',
+        fontSize:14,
+      },
+      card1:{
+        elevation:2,
+        borderRadius:18,
+        borderColor:'transparent',
+        top:'4%',
+        marginBottom:8,
+        marginLeft:'3%',
+        marginRight:'3%',
+      },
+      infoBox: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Condensed',
+        fontSize: 14,
+        textAlign:'left',
+      },
+      infoBoxButton: {
+        color:'white',
+        fontFamily:'Roboto',
+        fontSize: 12,
+        textAlign:'left',
+      },
+      
+      infoBoxInside: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Condensed',
+        fontSize: 12,
+        textAlign:'left',
+      },
+    
+      info: {
+        color:'#1e2023',
+        fontFamily:'Roboto',
+        fontSize: 14,
+        textAlign:'left',
+      },
+      ajuste:{
+        marginRight:'5%',
+      },
+      titulo: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Bold',
+        fontSize: 14,
+        marginBottom: '1%',
+        marginLeft: '1%',
+        textAlign:'left',
+      },
+      descricao_botao: {
+        marginLeft: 3,
+        color:"white",
+        textAlign: 'center',
+        fontFamily:'Roboto',
+        fontSize:14,
+      },
+      titulo2: {
+        color:"black",
+        fontFamily:'Roboto-Bold',
+        fontSize: 15,
+        textAlign:'left',
+        fontWeight:'700',
+      },
+    
+      descricao2: {
+        color:"#636363",
+        textAlign: 'left',
+        marginTop:'4%',
+        marginBottom:'4%',
+        fontFamily:'Roboto-Regular',
+        fontSize:12,
+      },
+    
+      descricao3: {
+        color:'black',
+        textAlign: 'left',
+        fontFamily:'Roboto-Condensed',
+        fontSize:12,
+      },
+    
+    
+    
+
+    
+      bloco2: {
+        flex: 1,
+        alignContent:'center',
+      },
+      bloco3: {
+        flex: 1,
+      },  
+      wrapper: {
+    
+      },
+    
+      slide: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
+      },
+    });
+    
+
+
+  */

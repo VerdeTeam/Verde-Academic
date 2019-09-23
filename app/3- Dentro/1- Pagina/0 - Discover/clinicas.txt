@@ -1,0 +1,624 @@
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Image, 
+  StatusBar, 
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  TextInput,
+  CheckBox,
+} from 'react-native';
+import { Container, Header, Button,
+Right, Body, Content, ListItem, Card, Left} from 'native-base';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+//import { TextInput,TextInputMask } from 'react-native-paper';
+import Serviços_Form from '../../0- Componentes/Explore/Category'
+import Clinicas_Form from '../../0- Componentes/Explore/Category_2'
+import { Actions } from 'react-native-router-flux';
+import Animated from 'react-native-reanimated';
+
+
+const images =[
+  {id: 1, uri: require('../../../../assets/Imagens/home/teste.png')},
+  {id: 2, uri: require('../../../../assets/Imagens/home/teste.png')},
+  {id: 3, uri: require('../../../../assets/Imagens/home/teste.png')},
+  {id: 4, uri: require('../../../../assets/Imagens/home/teste.png')},
+  {id: 5, uri: require('../../../../assets/Imagens/home/teste.png')},
+  {id: 6, },
+]
+
+const services_list =[
+  {id: 1, uri: require('../../../../assets/Imagens/home/discover4.png'), titulo:'Dermatologista'},
+  {id: 2, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Dentista'},
+  {id: 3, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Pediatra'},
+  {id: 4, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Teste3'},
+  {id: 5, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Teste4'},
+]
+
+const clinicas_list =[
+  {id: 1, uri: require('../../../../assets/Imagens/home/discover4.png'), titulo:'Clinica Girasol'},
+  {id: 2, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Dentista e Pediatra'},
+  {id: 3, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Pediatra'},
+  {id: 4, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Teste3'},
+  {id: 5, uri: require('../../../../assets/Imagens/home/teste.png'), titulo:'Teste4'},
+]
+
+const HEADER_HEIGHT = 70
+
+class Clinicas extends Component {
+ 
+
+  _menu = null;
+
+ setMenuRef = ref => {
+   this._menu = ref;
+ };
+
+ hideMenu = () => {
+   this._menu.hide();
+ };
+
+ showMenu = () => {
+   this._menu.show();
+ };
+
+
+  _submit(a) {
+
+    if (a == 1) {
+      Actions.rdoencas(); 
+    }
+    if (a == 2) {
+      Actions.home2(); 
+    }
+    if (a == 3) {
+      Actions.home3(); 
+    }
+    if (a == 'search') {
+      Actions.pesquisa(); 
+    }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: 'true',
+      shadow: false
+    };
+  }
+
+ 
+  render() {
+    //SCROLL MENU FUNCTIOM
+      const scrollY = new Animated.Value(0);
+      const diffClampScrollY = Animated.diffClamp(scrollY, 0,
+        HEADER_HEIGHT);
+      const headerY = Animated.interpolate(diffClampScrollY,{
+          inputRange:[0,HEADER_HEIGHT],
+          outputRange:[0,-HEADER_HEIGHT],
+      })
+      
+    return (
+      <Container style={{backgroundColor:'#f9f9f9'}}>
+       
+      <View style={{position:'absolute',elevation:1, zIndex:110,backgroundColor:'white', width:210, height:49.5, borderBottomRightRadius:10}}>{/* MANIPULAÇÃO DO SCROLL DO MENU */}
+        <Right style={{left:75,flexDirection:'row',top:-2}}>
+          <Button transparent>
+            <Image style={{ marginTop:9 ,marginRight:12, width:20, height:20}}
+            source = {require('../../../../assets/icon/menu/pesquisa.png')}/>
+          </Button>
+          <View style={{top:'-4%', right:9}}>
+            <Menu
+              ref={this.setMenuRef}
+              button={<TouchableOpacity onPress={this.showMenu}><Image  style={{width:20, height:20, marginLeft:9, marginRight:5}}
+              source = {require('../../../../assets/icon/menu/definicao.png')}/></TouchableOpacity>}
+            >
+              <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item}>Comparar Serviços</Text></MenuItem>
+              <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item}>Comparar Clinicas</Text></MenuItem>
+              <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item}>Filtrar</Text></MenuItem>
+              <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item}>Definições</Text></MenuItem>
+            </Menu>
+          </View>
+        </Right>
+      </View>
+      <View style={{flex:1,width:'100%',position:'absolute', zIndex:1000, bottom:30}}>
+        <Button transparent style={{backgroundColor:'white', elevation:4, borderRadius:30, width:50,height:50, 
+        alignItems:'center',justifyContent:'center', alignSelf:'center'}} 
+          onPress={()=> this._submit('search')}>
+          <Image style={{width:30, height:30}}
+          source = {require('../../../../assets/icon/footer/mapa1.png')}/>
+        </Button>
+      </View>
+
+      {/*<View style={{position:'absolute',elevation:0.5, zIndex:110,backgroundColor:'white', width:105, height:49.5, borderBottomRightRadius:10}}/> MANIPULAÇÃO DO SCROLL DO MENU */}
+      
+        <View>
+          <StatusBar barStyle = "dark-content" hidden = {false} 
+          backgroundColor = "white" translucent = {false}
+          />
+        </View>
+        <ScrollView  showsVerticalScrollIndicator={false} style={{zIndex:-100, marginTop:45}}
+            // onScrollBeginDrag={()=> this.setState({ shadow: false })}
+        >
+        
+
+          <View>
+            <StatusBar barStyle = "dark-content" hidden = {false} 
+            backgroundColor = "white" translucent = {false}
+            />
+          </View>
+      
+          <View style={{flex:1}}>  
+      
+          <Content>
+
+            <View style={{flex:1}}>
+
+              <View style={{flexDirection:'row'}}>
+              <Text style={[styles.titulo,{marginLeft:'6%', marginTop:'8.5%'}]}>Serviços</Text>
+              </View>
+              <Card transparent style={{elevation:0,marginLeft:'3%', marginRight:'3%'}}>
+          
+                <View>
+                
+                  <ScrollView
+                    scrollEventThrottle={16}
+                  >
+                    <View style={{height: 130, marginTop:8 }}>
+                      <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                      >
+                        {services_list.map(servico =>(
+                        <View key={servico.id}>
+                          <TouchableOpacity onPress={()=> this._submit('categoria')}>
+                            <Serviços_Form imageUri={servico.uri}
+                              name={servico.titulo}
+                            />
+                          </TouchableOpacity>
+                          </View>
+                        ))}
+                      </ScrollView>
+                    </View>
+                  </ScrollView> 
+                
+                </View>
+              
+              </Card>    
+
+              <View style={{flexDirection:'row', top:-25}}>
+                <Image source={require('../../../../assets/icon/clinica0.png')} style={{width:25, height:25, marginTop:'7%', marginLeft:'6%', marginRight:'2%'}}/>
+                <Text style={[styles.titulo,{marginLeft:'2%', marginTop:'8.5%'}]}>Clinicas</Text> 
+              </View>
+              
+              <View style={{top:-20}}>
+                {clinicas_list.map(servico =>(
+                <Card key={servico.id} transparent style={{elevation:0,marginLeft:'3%', marginRight:'3%'}}>
+            
+                  <View>
+                  
+                      <View style={{height: 130, marginTop:2 }}>
+                          
+                          <View>
+                            <TouchableOpacity onPress={()=> this._submit('categoria')}>
+                              <Clinicas_Form imageUri={servico.uri}
+                                name={servico.titulo}
+                              />
+                            </TouchableOpacity>
+                            </View>
+                          
+                      </View>
+                  
+                  </View>
+                
+                </Card> 
+                ))}   
+              </View>
+ 
+
+            </View>
+         
+         </Content>
+       </View>
+   </ScrollView>
+
+      </Container>
+      
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+ //TEXTO
+ titulo_header: {
+  fontFamily:'Roboto-Bold', 
+  fontSize:20, 
+  marginLeft:8,
+  marginTop:13,
+  color:'#181819',
+},
+ info_apoio:{
+  marginTop: '2%',
+  marginBottom: 20,
+//  position:'absolute',
+  zIndex:30,
+ // backgroundColor:'blue',
+ },
+
+ subtitulo_apoio: {
+  alignSelf:'center',
+  color:'black',
+  fontFamily:'Roboto-Bold',
+  fontSize: 14,
+  textAlign:'center',
+},
+
+
+ card:{
+  elevation:2,
+  width:'44%',
+  height:'50%',
+  marginLeft:'3%', 
+  marginRight:'3%', 
+  borderRadius:13, 
+  borderColor:'transparent',
+}, 
+card_image:{
+  width:'100%', 
+  height: '100.2%', 
+ // borderBottomLeftRadius:18,
+ // borderBottomRightRadius:18, 
+ // borderRadius:13,
+  borderTopLeftRadius:13,
+  borderTopRightRadius:13,
+  borderColor:'transparent',
+},
+card_popup:{
+  width:'100%', 
+  height: '100%', 
+ // borderBottomLeftRadius:18,
+ // borderBottomRightRadius:18, 
+  borderRadius:18,
+  borderColor:'transparent',
+},
+
+
+ //TESXTO FIM
+ 
+ 
+  search_text:{
+    fontFamily:'Medium',
+    fontSize:14,
+    marginLeft:'4%'
+  },
+  find_button:{
+    position:'absolute',
+    marginLeft:'82%',
+    marginTop:'3%',
+    zIndex:10,
+  },
+  search_area:{
+    width:'85%',
+    marginBottom:'2%',
+    marginTop:'3%'
+  },
+  search_button:{
+    position:'absolute',
+    marginLeft:'80%',
+    marginTop:'1%',
+    zIndex:10,
+  },
+  search:{
+    backgroundColor:'#EAEAEA',
+    color:'red',
+    borderRadius:13,
+    width:'70%',
+    marginLeft:'4%',
+    marginRight:'4%',
+    marginTop:'2%',
+    marginBottom:'2%',
+    zIndex:100
+  },
+  card1:{
+    elevation:3,
+    borderRadius:18,
+    borderColor:'transparent',
+    top:'4%',
+    marginBottom:8,
+    marginLeft:'3%',
+    marginRight:'3%',
+    //zIndex:-200,
+  },
+  infoBox: {
+    color:'#1e2023',
+    fontFamily:'Roboto-Condensed',
+    fontSize: 14,
+    textAlign:'left',
+  },
+  infoBoxButton: {
+    color:'white',
+    fontFamily:'Roboto',
+    fontSize: 12,
+    textAlign:'left',
+  },
+  
+  infoBoxInside: {
+    color:'#1e2023',
+    fontFamily:'Roboto-Condensed',
+    fontSize: 12,
+    textAlign:'left',
+  },
+
+  info: {
+    color:'#1e2023',
+    fontFamily:'Roboto',
+    fontSize: 14,
+    textAlign:'left',
+  },
+  ajuste:{
+    marginRight:'5%',
+  },
+  titulo: {
+    color:'#5F6267',
+    fontFamily:'Medium',
+    fontSize: 16,
+    marginTop: '4%',
+    marginBottom: '4%',
+    marginLeft: '8%',
+    textAlign:'left',
+  },
+  descricao_botao: {
+    marginLeft: 3,
+    color:"white",
+    textAlign: 'center',
+    fontFamily:'Roboto',
+    fontSize:14,
+  },
+  titulo2: {
+    color:"black",
+    fontFamily:'Roboto-Bold',
+    fontSize: 15,
+    textAlign:'left',
+    fontWeight:'700',
+  },
+
+  descricao2: {
+    color:"#636363",
+    textAlign: 'left',
+    marginTop:'4%',
+    marginBottom:'4%',
+    fontFamily:'Roboto-Regular',
+    fontSize:12,
+  },
+
+  descricao3: {
+    color:'black',
+    textAlign: 'left',
+    fontFamily:'Roboto-Condensed',
+    fontSize:12,
+  },
+
+  bloco2: {
+    flex: 1,
+    alignContent:'center',
+  },
+  bloco3: {
+    flex: 1,
+  },  
+  wrapper: {
+
+  },
+
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  },
+
+  menu_item: {
+    color:"black",
+    fontFamily:'Roboto-Condensed',
+    fontSize: 14,
+  //  textAlign:'center',
+  },
+});
+
+export default Clinicas;
+
+/*
+
+  render() {
+    return (
+      <Container>
+       
+       <Header style={{zIndex:100, backgroundColor: 'white'}} noShadow={this.state.shadow}>
+          <Body>
+          </Body>
+          <Right>
+            <Button transparent onPress={()=> this._submit('search')}>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../../assets/icon/menu/definicao.png')}/>
+            </Button>
+          </Right>
+        </Header>
+
+        <ScrollView  styles={{marginLeft:'3%'}} showsVerticalScrollIndicator={false} style={{zIndex:-100}}
+        // onScrollBeginDrag={()=> this.setState({ shadow: false })}
+        >
+          <View>
+            <StatusBar barStyle = "dark-content" hidden = {false} 
+            backgroundColor = "white" translucent = {false}
+            />
+          </View>
+
+          <View>  
+            
+            <View style={{backgroundColor:'blue'}}>
+              <Card style={styles.card1}>
+                <Text style={[styles.descricao2,{marginLeft:'4%'}]}>Faça um filtro</Text>
+                <Button transparent style={[styles.find_button]}>
+                    <Image style={{ marginTop:9 ,marginLeft:9, width:35, height:35}}
+                    source = {require('../../../../assets/icon/radar.png')}/>
+                </Button>
+                <View style={styles.search_area}>
+                  <Button transparent style={styles.search_button}>
+                    <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+                    source = {require('../../../../assets/icon/menu/pesquisa1.png')}/>
+                  </Button>
+                  <TextInput style={styles.search} placeholder="Digite o Nome da Entidade"/>
+                </View>
+              </Card>
+            </View>
+
+            <View style={{backgroundColor:'pink'}}>
+              <Card style={styles.card1}>
+                <Text style={[styles.descricao2,{marginLeft:'4%'}]}>Faça um filtro</Text>
+                <TextInput style={styles.search} placeholder="Digite o Nome da Entidade"/>
+              </Card>
+            </View>
+
+
+
+            {/* FIM VIEW GLOBAL 
+            </View>
+
+            </ScrollView>
+        
+          </Container>
+          
+        );
+      }
+    }
+    
+    const styles = StyleSheet.create({
+      find_button:{
+        position:'absolute',
+        marginLeft:'82%',
+        marginTop:'10%',
+        zIndex:10,
+      },
+      search_area:{
+        width:'85%',
+        marginBottom:'2%'
+      },
+      search_button:{
+        position:'absolute',
+        marginLeft:'80%',
+        marginTop:'1%',
+        zIndex:10,
+      },
+      search:{
+        backgroundColor:'#C7C7C7',
+        color:'red',
+        borderRadius:13,
+        marginLeft:'4%',
+        marginRight:'4%',
+        marginTop:'2%',
+        marginBottom:'2%',
+        fontFamily:'Medium',
+        fontSize:14,
+      },
+      card1:{
+        elevation:2,
+        borderRadius:18,
+        borderColor:'transparent',
+        top:'4%',
+        marginBottom:8,
+        marginLeft:'3%',
+        marginRight:'3%',
+      },
+      infoBox: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Condensed',
+        fontSize: 14,
+        textAlign:'left',
+      },
+      infoBoxButton: {
+        color:'white',
+        fontFamily:'Roboto',
+        fontSize: 12,
+        textAlign:'left',
+      },
+      
+      infoBoxInside: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Condensed',
+        fontSize: 12,
+        textAlign:'left',
+      },
+    
+      info: {
+        color:'#1e2023',
+        fontFamily:'Roboto',
+        fontSize: 14,
+        textAlign:'left',
+      },
+      ajuste:{
+        marginRight:'5%',
+      },
+      titulo: {
+        color:'#1e2023',
+        fontFamily:'Roboto-Bold',
+        fontSize: 14,
+        marginBottom: '1%',
+        marginLeft: '1%',
+        textAlign:'left',
+      },
+      descricao_botao: {
+        marginLeft: 3,
+        color:"white",
+        textAlign: 'center',
+        fontFamily:'Roboto',
+        fontSize:14,
+      },
+      titulo2: {
+        color:"black",
+        fontFamily:'Roboto-Bold',
+        fontSize: 15,
+        textAlign:'left',
+        fontWeight:'700',
+      },
+    
+      descricao2: {
+        color:"#636363",
+        textAlign: 'left',
+        marginTop:'4%',
+        marginBottom:'4%',
+        fontFamily:'Roboto-Regular',
+        fontSize:12,
+      },
+    
+      descricao3: {
+        color:'black',
+        textAlign: 'left',
+        fontFamily:'Roboto-Condensed',
+        fontSize:12,
+      },
+    
+    
+    
+
+    
+      bloco2: {
+        flex: 1,
+        alignContent:'center',
+      },
+      bloco3: {
+        flex: 1,
+      },  
+      wrapper: {
+    
+      },
+    
+      slide: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
+      },
+    });
+    
+
+
+  */

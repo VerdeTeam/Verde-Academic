@@ -1,0 +1,274 @@
+import React, { Component } from 'react';
+import {
+  StyleSheet, 
+  Text, 
+  View,
+  Image, 
+  StatusBar,
+  ScrollView, 
+  TouchableOpacity,
+} from 'react-native';
+import { Container, Header, Right, Body, Content, Button, List, ListItem,} from 'native-base';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import { Actions} from 'react-native-router-flux';
+import { Surface} from 'react-native-paper';
+import Noticias from '../0- Componentes/Explore/Noticias';
+import Fotos from '../0- Componentes/Explore/artigo.fotos';
+
+
+export default class Home3 extends Component {
+ 
+   // CONFIGURAÇÃO DOS MENUS
+
+ _menu = null;
+
+ setMenuRef = ref => {
+   this._menu = ref;
+ };
+
+ hideMenu = () => {
+   this._menu.hide();
+ };
+
+ showMenu = () => {
+   this._menu.show();
+ };
+
+ // FIM DA CONFIGURAÇÃO DOS MENUS
+
+
+
+  _submit(a) {
+    if (a == 1) {
+      Actions.home1(); 
+    }
+    if (a == 2) {
+      Actions.home2(); 
+    }
+    if (a == 3) {
+      Actions.home3(); 
+    }
+  }
+
+ 
+  render() {
+    return (      
+      <Container style={{backgroundColor:'#f9f9f9'}}>
+       <Header style={{zIndex:100, elevation:0.5, backgroundColor: 'white'}} noShadow={false}>
+          <Body>
+          </Body>
+          <Right>
+          <View style={{top:'-3%', right:9}}>
+              <Menu
+                ref={this.setMenuRef}
+                button={<TouchableOpacity onPress={this.showMenu}><Image  style={{width:25, height:25, marginLeft:9, marginRight:5}}
+                source = {require('../../../assets/icon/menu/fontchange.png')}/></TouchableOpacity>}
+              >
+                <MenuItem><Text style={styles.menu_item}>Tamanho da Letra</Text></MenuItem>
+                <MenuDivider/>
+                <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item}>Pequena</Text></MenuItem>
+                <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item2}>Média</Text></MenuItem>
+                <MenuItem onPress={this.hideMenu}><Text style={styles.menu_item3}>Larga</Text></MenuItem>
+               </Menu>
+            </View>
+            <Button transparent>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../assets/icon/menu/download.png')}/>
+            </Button>
+            <Button transparent>
+              <Image style={{ marginTop:9 ,marginLeft:9, width:20, height:20}}
+              source = {require('../../../assets/icon/menu/share.png')}/>
+            </Button>
+          </Right>
+        </Header>
+       
+        <ScrollView  showsVerticalScrollIndicator={false} style={{zIndex:-100}}
+            // onScrollBeginDrag={()=> this.setState({ shadow: false })}
+        >
+        
+
+          <View>
+            <StatusBar barStyle = "dark-content" hidden = {false} 
+            backgroundColor = "white" translucent = {false}
+            />
+          </View>
+      
+          <View style={{flex:1}}>  
+      
+          <Content>
+
+              <View>
+                
+                <View style={{marginLeft:'6%',marginRight:'6%', marginTop:'4%'}}>
+                 <Text style={styles.tituloNoticia}>ANGOLA - Angola Recebe Doação de 7 Mil Cadernos de Saúde Materno Infantil do Japão</Text>
+                </View>
+
+                <View>
+
+                  <View style={{flex:1, marginLeft:'6%'}}>
+                    <Image 
+                    style={{marginTop:'7%', width:14.7, height:15}}
+                    source={require('../../../assets/home/3/1/1.png')}/>
+                    <Text style={[styles.infoNoticia,{position:'absolute',marginTop: '8%', marginLeft: '6%', textAlign: 'left',}]}>05 - JULHO - 2019</Text>
+                  </View>
+
+                  <View style={{flex:1, position:'absolute',marginLeft:'36%', marginTop:'4.6%'}}>
+                    <Image 
+                    style={{marginTop:'7%', width:14.7, height:14.7}}
+                    source={require('../../../assets/home/3/1/2.png')}/>
+                    <Text style={[styles.infoNoticia,{position:'absolute',marginTop: '10.2%', marginLeft: '21%', textAlign: 'left',}]}>19 H : 30 M</Text>
+                  </View>
+
+                  <View style={{flex:1, position:'absolute',marginLeft:'66%', width:'100%', marginRight:'6%', marginTop:'4.6%'}}>
+                    <Image 
+                    style={{marginTop:'5%', width:14.9, height:14.7}}
+                    source={require('../../../assets/home/3/1/3.png')}/>
+                    <Text style={[styles.infoNoticia,{position:'absolute',marginTop: '7.1%', marginLeft: '19%', textAlign: 'left',}]}>MINISTERIO DA SAÚDE</Text>
+                  </View>
+
+                </View>  
+          
+                <Surface style={styles.surface}>
+                  
+                  <Image source={require('../../../assets/home/1/mn3.png')}
+                  style={{ borderRadius:5, borderColor:'white', width:'120%',height: 205
+                  }}/>
+                  
+                </Surface>
+
+                <View style={{marginLeft:'6%',marginRight:'6%'}}>
+                 <Text style={[styles.tituloNoticia2,{marginLeft:'3%',marginRight:'3%'}]}>Em termos jurídicos, o Ministério da Saúde teve: </Text>
+                </View>
+
+                <View style={{marginTop:'4%',marginLeft:'3%',marginRight:'3%'}}>
+                  <Text style={styles.descricao}>
+                    O secretário de Estado para Saúde Pública, José Cunha, recebeu, em nome do Ministério da Saúde, a doação de Setecentos mil Cadernos Materno Infantil (CSMI), 
+                    no final da tarde desta terça-feira, 3, na sede do MINSA, numa cerimónia oficial de entrega simbólica, testemunhada por várias entidades angolanas e japonesas, nomeadamente o embaixador Japonês Hironori Sawada.{'\n\n'} 
+                    O referido caderno faz parte do Projecto para o Melhoria da Saúde da Mãe e Criança, denominado (PROMESSA) e da estratégia da 
+                    redução da mortalidade materno- infantil que permite o registo dos serviços de atenção à saúde e nutrição da mãe, da criança, a partir 
+                    das consultas pré-natais, parto, puericultura, incluindo calendário de vacinação, acompanhamento nutricional e seguimento do desenvolvimento 
+                    neuro-psicomotor da criança, que começa desde a gravidez da mãe e continua ao recém-nascido até aos 5 anos de idade.{'\n'} O projecto 
+                    insere-se no quadro da parceria estratégica existente entre a Angola e o Japão cuja implementação é realizada através da Direcção Nacional de Saúde Pública 
+                    e da Agência Internacional de Cooperação do Japão (JICA).{'\n'}Recorde-se que o referido instrumento está a ser implementado, a título piloto, nas províncias de 
+                    Luanda e Benguela desde Julho de 2018 e com este passo permitirá a extensão à província do Huambo, a partir de Setembro do presente ano.{'\n'}Até a presente data, 
+                    já foram distribuídos duzentos e dezoito mil e oitenta e três Cadernos de Saúde Materno Infantil e foram realizadas vinte três sessões de formação de formadores e 
+                    dezanove actos de supervisão sobre o uso e manuseamento do referido instrumento, envolvendo duzentas e sessenta e sete Unidades Sanitárias, nas duas províncias.
+                  </Text>
+                  
+                </View>
+              </View>  
+
+              <ScrollView
+              scrollEventThrottle={16}
+            >
+              <ListItem style={{borderBottomColor:'white'}}>
+                <ScrollView
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                >
+                  <View style={{marginRight:15}}>
+                    <Image style={{borderRadius:5, height: 90, width:110}} source={require('../../../assets/hospital/1.jpg')}/>
+                  </View>
+
+                  <View style={{marginRight:15}}>
+                    <Image style={{borderRadius:5, height: 90, width:110}} source={require('../../../assets/hospital/1.jpg')}/>
+                  </View>
+
+                  <View style={{marginRight:15}}>
+                    <Image style={{borderRadius:5, height: 90, width:110}} source={require('../../../assets/hospital/1.jpg')}/>
+                  </View>
+
+                </ScrollView>
+              </ListItem>
+            </ScrollView>
+              
+        
+            </Content>
+          
+          </View>
+        
+        </ScrollView>
+      
+      </Container>
+      
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  titulo: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 14,
+    marginTop: '5%',
+    marginBottom: '5%',
+    marginLeft:'6%',
+    textAlign:'left',
+    fontWeight:'700',
+  },
+
+  descricao: {
+    marginTop:12,
+    color:'#5A5A5A',
+    textAlign: 'left',
+    fontFamily:'times',
+    fontSize:16,
+  },
+
+
+  infoNoticia: {
+    color:"black",
+    fontFamily:'Roboto-Condensed',
+    fontSize:8,
+  },
+  tituloNoticia: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 18,
+    marginTop: '2%',
+    marginBottom: '2%',
+    textAlign:'left',
+    fontWeight:'700',
+  },
+
+  
+  tituloNoticia2: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 14,
+    marginTop: '2%',
+    marginBottom: 15,
+    textAlign:'center',
+    fontWeight:'500',
+  },
+  surface: {
+    backgroundColor:'red',
+    marginTop:'2%',
+    marginLeft:'-1%',
+    marginRight:'-1%',
+    borderRadius:5, 
+    borderColor:'white',
+    width:'88%', 
+    height: 205,
+    elevation: 0,
+  },
+  menu_item: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 12,
+  //  textAlign:'center',
+  },
+  menu_item2: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 16,
+  //  textAlign:'center',
+  },
+  menu_item3: {
+    color:"black",
+    fontFamily:'times',
+    fontSize: 20,
+  //  textAlign:'center',
+  },
+
+});
